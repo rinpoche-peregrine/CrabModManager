@@ -34,3 +34,9 @@ Bungus
 ## Source
 
 <https://github.com/rinpoche-peregrine/CrabModManager>
+
+## Support
+
+If you find this useful, you can buy me a coffee:
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z852YLV)

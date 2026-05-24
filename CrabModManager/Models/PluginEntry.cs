@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -9,6 +10,8 @@ public class PluginEntry : INotifyPropertyChanged {
 	public string Version { get; init; } = "";
 	public string Description { get; init; } = "";
 	public string FolderPath { get; init; } = "";
+	public DateTime InstallDate { get; init; }
+	public string InstallDateText => InstallDate == DateTime.MinValue ? "" : InstallDate.ToString("yyyy-MM-dd HH:mm");
 
 	bool _enabled;
 	public bool Enabled {

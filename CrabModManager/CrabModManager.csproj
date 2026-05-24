@@ -19,4 +19,16 @@
 		<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	</PropertyGroup>
+	<!-- Sandbox-build leftovers: rename-on-cleanup leaves locked folders behind. Exclude their contents from globs. -->
+	<ItemGroup>
+		<Compile Remove="obj.locked\**" />
+		<Compile Remove="bin.locked\**" />
+		<None Remove="obj.locked\**" />
+		<None Remove="bin.locked\**" />
+		<EmbeddedResource Remove="obj.locked\**" />
+		<EmbeddedResource Remove="bin.locked\**" />
+		<Page Remove="obj.locked\**" />
+		<Page Remove="bin.locked\**" />
+		<ApplicationDefinition Remove="obj.locked\**" />
+	</ItemGroup>
 </Project>

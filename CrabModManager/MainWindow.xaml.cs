@@ -1,11 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using CrabModManager.Models;
 using CrabModManager.Services;
 using Microsoft.Win32;
@@ -17,22 +19,27 @@ public partial class MainWindow : Window {
 	readonly BepInExInstaller _installer;
 	readonly PluginManager _plugins;
 	readonly ObservableCollection<PluginEntry> _items = new();
+	ICollectionView? _view;
+
+	// Sort state. Default: enabled mods first, then by name.
+	string _sortKey = "Name";
+	ListSortDirection _sortDir = ListSortDirection.Ascending;
 
 	public MainWindow() {
 		InitializeComponent();
-		// In a single-file self-contained app, BaseDirectory points to the bundle's extract dir,
-		// not the .exe location. Use the process module path instead.
 		var exePath = Process.GetCurrentProcess().MainModule?.FileName ?? AppContext.BaseDirectory;
 		_gameDir = Path.GetDirectoryName(exePath)!;
 		_installer = new BepInExInstaller(_gameDir);
 		_plugins = new PluginManager(_gameDir);
-		PluginList.ItemsSource = _items;
+
+		_view = CollectionViewSource.GetDefaultView(_items);
+		PluginList.ItemsSource = _view;
+		ApplySort();
+
 		Loaded += (_, _) => Refresh();
 	}
 
-	void Log(string msg) {
-		Dispatcher.Invoke(() => LogLine.Text = msg);
-	}
+	void Log(string msg) => Dispatcher.Invoke(() => LogLine.Text = msg);
 
 	void Refresh() {
 		var state = _installer.GetState();
@@ -52,7 +59,46 @@ public partial class MainWindow : Window {
 
 		_items.Clear();
 		foreach (var p in _plugins.Scan()) _items.Add(p);
+		_view?.Refresh();
+		UpdateHeaderLabels();
 		Log($"Found {_items.Count} plugin(s).");
+	}
+
+	void ApplySort() {
+		if (_view == null) return;
+		_view.SortDescriptions.Clear();
+		switch (_sortKey) {
+			case "Enabled":
+				_view.SortDescriptions.Add(new SortDescription(nameof(PluginEntry.Enabled), _sortDir));
+				_view.SortDescriptions.Add(new SortDescription(nameof(PluginEntry.DisplayName), ListSortDirection.Ascending));
+				break;
+			case "InstallDate":
+				_view.SortDescriptions.Add(new SortDescription(nameof(PluginEntry.InstallDate), _sortDir));
+				break;
+			case "Name":
+			default:
+				_view.SortDescriptions.Add(new SortDescription(nameof(PluginEntry.DisplayName), _sortDir));
+				break;
+		}
+		UpdateHeaderLabels();
+	}
+
+	void UpdateHeaderLabels() {
+		string Arrow(string key) => key == _sortKey ? (_sortDir == ListSortDirection.Ascending ? "  ▲" : "  ▼") : "";
+		HdrEnabled.Content = $"Enable/Disable{Arrow("Enabled")}";
+		HdrName.Content = $"Mod{Arrow("Name")}";
+		HdrInstallDate.Content = $"Install Date{Arrow("InstallDate")}";
+	}
+
+	void OnSortHeader(object sender, RoutedEventArgs e) {
+		if (sender is not Button btn || btn.Tag is not string key) return;
+		if (_sortKey == key) {
+			_sortDir = _sortDir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+		} else {
+			_sortKey = key;
+			_sortDir = ListSortDirection.Ascending;
+		}
+		ApplySort();
 	}
 
 	async void OnInstallBepInEx(object sender, RoutedEventArgs e) {
@@ -89,6 +135,11 @@ public partial class MainWindow : Window {
 	}
 
 	void OnRefresh(object sender, RoutedEventArgs e) => Refresh();
+
+	void OnCredits(object sender, RoutedEventArgs e) {
+		var w = new CreditsWindow { Owner = this };
+		w.ShowDialog();
+	}
 
 	void OnDragEnterDrop(object sender, DragEventArgs e) {
 		e.Effects = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;

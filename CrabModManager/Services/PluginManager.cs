@@ -43,6 +43,7 @@ public class PluginManager {
 				Description = entry.Description,
 				FolderPath = dir,
 				Enabled = enabled,
+				InstallDate = SafeCreationTime(dir),
 			});
 		}
 		// Also surface loose .dll files at the root (legacy plugins).
@@ -54,6 +55,7 @@ public class PluginManager {
 				Description = "(loose DLL)",
 				FolderPath = dll,
 				Enabled = enabled,
+				InstallDate = SafeCreationTime(dll),
 			});
 		}
 	}
@@ -141,5 +143,13 @@ public class PluginManager {
 			e.ExtractToFile(dest, overwrite: true);
 		}
 		return pkgName;
+	}
+	static DateTime SafeCreationTime(string path) {
+		try {
+			var c = File.GetCreationTime(path);
+			var w = File.GetLastWriteTime(path);
+			// Use whichever is earlier; creation time can be wrong on some filesystems after moves.
+			return c < w ? c : w;
+		} catch { return DateTime.MinValue; }
 	}
 }
