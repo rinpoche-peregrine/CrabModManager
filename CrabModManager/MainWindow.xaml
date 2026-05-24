@@ -1,0 +1,108 @@
+<Window x:Class="CrabModManager.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Crab Mod Manager"
+	Width="780" Height="600" MinWidth="640" MinHeight="420"
+	Background="{StaticResource Bg}"
+	WindowStartupLocation="CenterScreen">
+
+	<Window.Resources>
+		<Style TargetType="Button">
+			<Setter Property="Background" Value="{StaticResource BgPanel}"/>
+			<Setter Property="Foreground" Value="{StaticResource Fg}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource Accent}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Padding" Value="10,5"/>
+			<Setter Property="Margin" Value="4,0"/>
+			<Setter Property="Cursor" Value="Hand"/>
+		</Style>
+		<Style TargetType="TextBlock">
+			<Setter Property="Foreground" Value="{StaticResource Fg}"/>
+		</Style>
+		<Style TargetType="CheckBox">
+			<Setter Property="Foreground" Value="{StaticResource Fg}"/>
+		</Style>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<!-- Header -->
+		<Grid Grid.Row="0" Margin="14,14,14,8">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<StackPanel Grid.Column="0">
+				<TextBlock Text="Crab Mod Manager" FontSize="20" FontWeight="Bold"/>
+				<TextBlock Name="StatusLabel" Foreground="{StaticResource FgDim}" Margin="0,2,0,0"
+					Text="Checking install..."/>
+			</StackPanel>
+			<StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+				<Button Name="BtnInstallBepInEx" Content="Install BepInEx" Click="OnInstallBepInEx"/>
+				<Button Name="BtnLaunchGame" Content="Launch Game" Click="OnLaunchGame"/>
+				<Button Name="BtnRefresh" Content="Refresh" Click="OnRefresh"/>
+			</StackPanel>
+		</Grid>
+
+		<!-- Drop zone -->
+		<Border Grid.Row="1" Margin="14,4,14,8" Padding="20" CornerRadius="8"
+			BorderBrush="{StaticResource Accent}" BorderThickness="2"
+			Background="{StaticResource BgPanel}"
+			AllowDrop="True" DragEnter="OnDragEnterDrop" DragOver="OnDragEnterDrop" Drop="OnDrop"
+			MouseLeftButtonUp="OnDropZoneClick" Cursor="Hand">
+			<StackPanel HorizontalAlignment="Center">
+				<TextBlock Name="DropLabel" Text="Drop Mod Archive Here" FontSize="16" FontWeight="Bold"
+					HorizontalAlignment="Center" Foreground="{StaticResource Accent}"/>
+				<TextBlock Text="(or click to browse for a .zip)" FontSize="11"
+					HorizontalAlignment="Center" Foreground="{StaticResource FgDim}" Margin="0,4,0,0"/>
+			</StackPanel>
+		</Border>
+
+		<!-- Plugin list -->
+		<ListView Grid.Row="2" Name="PluginList" Margin="14,4,14,8"
+			Background="{StaticResource BgPanel}" Foreground="{StaticResource Fg}"
+			BorderThickness="0">
+			<ListView.ItemContainerStyle>
+				<Style TargetType="ListViewItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+				</Style>
+			</ListView.ItemContainerStyle>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<Grid Margin="4,6">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+						<CheckBox Grid.Column="0" IsChecked="{Binding Enabled, Mode=TwoWay}"
+							Click="OnToggleEnabled" Tag="{Binding}"
+							VerticalAlignment="Center"/>
+						<StackPanel Grid.Column="1" Margin="10,0">
+							<TextBlock FontSize="14" FontWeight="SemiBold">
+								<Run Text="{Binding DisplayName}"/>
+								<Run Text=" "/>
+								<Run Text="{Binding Version}" Foreground="{StaticResource FgDim}"/>
+							</TextBlock>
+							<TextBlock Text="{Binding Description}" Foreground="{StaticResource FgDim}"
+								FontSize="11" TextTrimming="CharacterEllipsis"/>
+						</StackPanel>
+						<Button Grid.Column="2" Content="Uninstall" Click="OnUninstall" Tag="{Binding}"
+							VerticalAlignment="Center"/>
+					</Grid>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+
+		<!-- Status bar -->
+		<Border Grid.Row="3" Background="{StaticResource BgPanel}" Padding="14,6">
+			<TextBlock Name="LogLine" Foreground="{StaticResource FgDim}" Text="Ready."/>
+		</Border>
+	</Grid>
+</Window>

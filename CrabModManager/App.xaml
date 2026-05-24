@@ -1,0 +1,15 @@
+<Application x:Class="CrabModManager.App"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	StartupUri="MainWindow.xaml">
+	<Application.Resources>
+		<SolidColorBrush x:Key="Bg" Color="#FF111418"/>
+		<SolidColorBrush x:Key="BgPanel" Color="#FF1A1F26"/>
+		<SolidColorBrush x:Key="Fg" Color="#FFE8ECF1"/>
+		<SolidColorBrush x:Key="FgDim" Color="#FF9098A4"/>
+		<SolidColorBrush x:Key="Accent" Color="#FFE60000"/>
+		<SolidColorBrush x:Key="AccentDim" Color="#FF801010"/>
+		<SolidColorBrush x:Key="Ok" Color="#FF4DC974"/>
+		<SolidColorBrush x:Key="Warn" Color="#FFE6A930"/>
+	</Application.Resources>
+</Application>

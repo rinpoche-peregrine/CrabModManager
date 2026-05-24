@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>CrabModManager</AssemblyName>
+		<RootNamespace>CrabModManager</RootNamespace>
+		<Version>0.1.0</Version>
+		<AssemblyTitle>Crab Mod Manager</AssemblyTitle>
+		<Description>BepInEx mod manager for Everything is Crab</Description>
+		<Company>Bungus</Company>
+		<!-- Single-file self-contained publish defaults; override on CLI as needed. -->
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<SelfContained>true</SelfContained>
+		<PublishSingleFile>true</PublishSingleFile>
+		<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+	</PropertyGroup>
+</Project>
