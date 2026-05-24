@@ -2,34 +2,30 @@
 
 <img src="Packaging/icon.png" width="160" align="right" alt="Crab Mod Manager icon" />
 
-A tiny BepInEx mod manager for *Everything is Crab*. Drop the exe into your game folder, run it, install mods by dragging zips, toggle them with checkboxes.
-
-## Description
-
-Lightweight, single-file Windows app that lives inside your *Everything is Crab* install directory. No Steam / Thunderstore account, no profiles, no game-list dropdown — just one game, one folder, one manager. Built specifically because *Everything is Crab* doesn't have a Thunderstore community (yet).
-
-## Installation instructions
-
-1. Download `CrabModManager.exe` from the [Releases](../../releases) page.
-2. Put it directly in your *Everything is Crab* install folder — the one with `Everything is Crab.exe` in it (typically `C:\Program Files (x86)\Steam\steamapps\common\Everything is Crab\` or your custom Steam library).
-3. Double-click `CrabModManager.exe` to run.
-
-## Main features
-
-- **Installs BepInEx with one click.** Detects whether BepInEx is already present; if not, downloads the right Unity 6 IL2CPP CoreCLR build (currently BE 755) and extracts it.
-- **Drag-and-drop mod install.** Drop any Thunderstore-style mod zip onto the window and it lands in `BepInEx/plugins/`.
-- **Enable/disable per mod.** Toggle the checkbox to move a mod out of the loader's path without uninstalling.
-- **Uninstall button.** One-click delete of any installed mod folder.
-- **Launch Game button.** Saves alt-tabbing back to Steam.
+A small mod manager for *Everything is Crab*. Place the exe in your game folder and use it to install BepInEx and manage your mods.
 
 ## Requirements
 
-- **Windows 10/11 x64.** No .NET install needed — the runtime is bundled.
-- *Everything is Crab* installed somewhere on disk.
+- Windows 10 or 11 (x64). No .NET install needed. The runtime is bundled.
+- *Everything is Crab* installed.
 
-## How enable/disable actually works
+## Install
 
-A disabled mod's folder is moved from `BepInEx/plugins/<name>/` to `BepInEx/plugins-disabled/<name>/`. BepInEx only scans `plugins/`, so anything in `plugins-disabled/` is invisible to the loader. Re-enabling moves it back.
+1. Download `CrabModManager.exe` from the [Releases](../../releases) page.
+2. Put it in your *Everything is Crab* install folder. That is the folder with `Everything is Crab.exe` in it.
+3. Double-click it.
+
+## Features
+
+- Installs BepInEx with one click. Downloads the Unity 6 IL2CPP CoreCLR build (currently BE 755).
+- Drag and drop install for any Thunderstore-style mod zip.
+- Enable and disable mods with a checkbox. Disabled mods move to `BepInEx/plugins-disabled/` so the loader skips them.
+- One-click uninstall.
+- Launch Game button.
+
+## Notes
+
+This is a small Windows-only tool built specifically for *Everything is Crab*. If your game gets a Thunderstore community, [Gale](https://github.com/Kesomannen/gale) and r2modman will also work and have more features.
 
 ## Author
 

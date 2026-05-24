@@ -3,8 +3,8 @@
 ## 0.1.0
 
 - Initial release.
-- One-click BepInEx 6 BE 755 install (Unity 6 IL2CPP CoreCLR).
-- Drag-and-drop Thunderstore-style zip install (also click-to-browse).
-- Enable/disable per mod via folder move.
+- One-click install of BepInEx 6 BE 755 (Unity 6 IL2CPP CoreCLR).
+- Drag and drop install for Thunderstore-style mod zips. Also click-to-browse.
+- Enable and disable per mod by folder move.
 - Uninstall button.
 - Launch Game button.
