@@ -4,6 +4,8 @@
 
 A small mod manager for *Everything is Crab*. Place the exe in your game folder and use it to install BepInEx and manage your mods.
 
+Also available on [Nexus Mods](https://www.nexusmods.com/everythingiscrab/mods/2).
+
 ## Requirements
 
 - Windows 10 or 11 (x64). No .NET install needed. The runtime is bundled.
@@ -11,15 +13,16 @@ A small mod manager for *Everything is Crab*. Place the exe in your game folder 
 
 ## Install
 
-1. Download `CrabModManager.exe` from the [Releases](../../releases) page.
+1. Download `CrabModManager.exe` from the [Releases](../../releases) page (or from [Nexus](https://www.nexusmods.com/everythingiscrab/mods/2)).
 2. Put it in your *Everything is Crab* install folder. That is the folder with `Everything is Crab.exe` in it.
 3. Double-click it.
 
 ## Features
 
 - Installs BepInEx with one click. Downloads the Unity 6 IL2CPP CoreCLR build (currently BE 755).
-- Drag and drop install for any Thunderstore-style mod zip.
+- Drag and drop install for any Thunderstore-style mod zip. Works with mods like [Skip Intro](https://github.com/rinpoche-peregrine/EverythingIsCrabMods) and [Past Player Characters as Mobs](https://github.com/rinpoche-peregrine/PastPlayerCharactersAsMobs).
 - Enable and disable mods with a checkbox. Disabled mods move to `BepInEx/plugins-disabled/` so the loader skips them.
+- Sort the mod list by name, install date, or enabled state.
 - One-click uninstall.
 - Launch Game button.
 

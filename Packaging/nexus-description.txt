@@ -1,0 +1,45 @@
+[size=5][b]Crab Mod Manager[/b][/size]
+
+A small mod manager for Everything is Crab. Drop the exe in your game folder, run it, and use it to install BepInEx and manage your mods.
+
+[size=4][b]Requirements[/b][/size]
+
+[list]
+[*]Windows 10 or 11 (x64). No .NET install needed. The runtime is bundled.
+[*]Everything is Crab installed somewhere.
+[/list]
+
+[size=4][b]Install[/b][/size]
+
+[list=1]
+[*]Download CrabModManager.exe from the Files tab.
+[*]Put it in your Everything is Crab install folder. That is the folder with Everything is Crab.exe in it.
+[*]Double-click it.
+[/list]
+
+[size=4][b]Features[/b][/size]
+
+[list]
+[*]Installs BepInEx with one click. Downloads the correct Unity 6 IL2CPP CoreCLR build (currently BE 755).
+[*]Drag and drop install for any Thunderstore-style mod zip. Compatible with mods like [url=https://www.nexusmods.com/everythingiscrab/mods/1]Skip Intro[/url].
+[*]Enable and disable mods with a checkbox. Disabled mods move to BepInEx/plugins-disabled/ so the loader skips them.
+[*]Sort the mod list by name, install date, or enabled state.
+[*]One-click uninstall.
+[*]Launch Game button.
+[/list]
+
+[size=4][b]How enable/disable actually works[/b][/size]
+
+A disabled mod's folder moves from BepInEx/plugins/ to BepInEx/plugins-disabled/. BepInEx only scans plugins/, so anything in plugins-disabled/ is invisible to the loader. Re-enabling moves it back.
+
+[size=4][b]Notes[/b][/size]
+
+This is a Windows-only tool built specifically for Everything is Crab. If the game gets a Thunderstore community page, mod managers like Gale and r2modman will also work and have more features.
+
+[size=4][b]Source[/b][/size]
+
+[url=https://github.com/rinpoche-peregrine/CrabModManager]github.com/rinpoche-peregrine/CrabModManager[/url]
+
+[size=4][b]Support[/b][/size]
+
+[url=https://ko-fi.com/Z8Z852YLV]ko-fi.com/Z8Z852YLV[/url]
